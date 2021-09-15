@@ -28,7 +28,7 @@ int main(void)
   Carcel presos[40];
   int op;
   int n;
-  int *p=&n;
+  //int *p=&n;
   int parametro;
   char parametroBusqueda[20];
   char user[20];
@@ -72,7 +72,7 @@ int main(void)
       printf("La lista de reos y su condena es: \n");
       for(int i=0; i<n;i++)
       {
-        printf("ID [ %d ] , Tiempo de condena [ %d ] \n",presos[i].id,presos[i].tiempoCondena);
+        printf("ID [ %d ] , Tiempo de condena [ %d ], nombre[%s], \n",presos[i].id,presos[i].tiempoCondena,presos[i].nombre);
       }
       ordenarPresos(presos, n);
       break;
@@ -194,6 +194,7 @@ void ordenarPresos(Carcel presos[],int n)
             presos[j].tiempoCondena=presos[j+1].tiempoCondena;
             presos[j+1].tiempoCondena=aux;
             }
+            
 
         }
          printf( "[ %d ]",presos[i].tiempoCondena);
