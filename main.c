@@ -28,13 +28,12 @@ int main(void)
   Carcel presos[40];
   int op;
   int n;
-  //int *p=&n;
   int parametro;
   char parametroBusqueda[20];
   char user[20];
   char password[20];
 
-  printf("**************CARCEL ESTATAL DE QUITO*************\n \n");
+  printf("*****CARCEL ESTATAL DE QUITO****\n \n");
   printf("Ingrese su usuario\n");
   scanf("%s",user);
   printf("Ingrese su contraseña\n");
@@ -45,7 +44,7 @@ int main(void)
 
   do
   { 
-    printf("\t \t *********BIENVENIDO A LA CARCEL ESTATAL***********\n");
+    printf("\t \t ****BIENVENIDO A LA CARCEL ESTATAL****\n");
     printf("\t------Seleccione la accion que desea realizar-------- \t \t \n");
     
     printf("\t \t 1. Ingresar datos de los reos \n \n");
@@ -61,7 +60,14 @@ int main(void)
       case 1: 
       printf("\n \t Ingrese el número de presos que desea registrar: \n \n");
       scanf("%d",&n);
-      agregarPresos(presos,n);
+      if(n>0)
+      {
+        agregarPresos(presos,n);     
+      }
+      else
+      {
+         printf("\n Por favor ingrese un dato valido \n \n"); 
+      }
       break;
 
       case 2:
@@ -72,7 +78,7 @@ int main(void)
       printf("La lista de reos y su condena es: \n");
       for(int i=0; i<n;i++)
       {
-        printf("ID [ %d ] , Tiempo de condena [ %d ], nombre[%s], \n",presos[i].id,presos[i].tiempoCondena,presos[i].nombre);
+        printf("ID [ %d ] , Tiempo de condena [ %d ] \n",presos[i].id,presos[i].tiempoCondena);
       }
       ordenarPresos(presos, n);
       break;
@@ -95,6 +101,7 @@ int main(void)
               {
                   printf("\n %d  \t %s  \t \t %s  \t \t %d \t \t \t %s \t \t \t %d \t \t \t  %s \n \n",presos[i].id,presos[i].nombre,presos[i].apellido,presos[i].edad,presos[i].crimen,presos[i].tiempoCondena, presos[i].pabellon);
               }
+             //else{printf("\n \n Ingrese un dato valido \n \n");}
             }
             else 
             {
@@ -106,6 +113,7 @@ int main(void)
                   {
                    printf("\n %d \t \t \t %s \t \t \t %s \t \t \t %d \t \t \t %s \t \t \t %d \t \t \t %s \n",presos[i].id,presos[i].nombre,presos[i].apellido,presos[i].edad,presos[i].crimen,presos[i].tiempoCondena, presos[i].pabellon);
                   }
+                  else{printf("\n \n \t Ingrese un dato valido \n \n");}
                 
             }
            
@@ -113,18 +121,18 @@ int main(void)
             }
       break;
       case 5:
-      printf("\n********** Resultados almacenados en el archivo********** \n");
+      printf("\n**** Resultados almacenados en el archivo**** \n");
             datos = fopen("presos.txt", "w");
       for(int i=0; i<n; i++)
             {
-            fprintf(datos,"%d %s %s %d %d %s",presos[i].id,presos[i].nombre,presos[i].apellido,presos[i].edad,presos[i].tiempoCondena,presos[i].pabellon);
+            fprintf(datos,"%d %s %s %d %s %d %s",presos[i].id,presos[i].nombre,presos[i].apellido,presos[i].edad,presos[i].crimen,presos[i].tiempoCondena,presos[i].pabellon);
             }
             fclose(datos);
             printf("\n");
       break;
       default:
         {
-            printf("Gracias por visitarnos \n");
+            printf("Elija una opcion valida \n \n");
             break;
         }
     }
@@ -154,20 +162,52 @@ void agregarPresos(Carcel presos[], int n)
       scanf("%s",presos[i].apellido);
       printf("\n Ingrese la edad del preso %d: ",i+1);
       scanf("%d",&presos[i].edad);
+       if(presos[i].edad>0)
+      {    
+      }
+      else
+      {
+         printf("\n Por favor ingrese un dato valido \n \n"); 
+      }
       printf("\n Ingrese el crimen cometido del preso %d: ",i+1);
       scanf("%s",presos[i].crimen);
       printf("\n Ingrese el tiempo en anios de condena del preso %d: ",i+1);
       scanf("%d",&presos[i].tiempoCondena);
-      printf("\n Ingrese el pabellon al que pertenece el preso %d: \n",i+1);
-      printf(" A \t  B \t  C \n \n");
-      scanf("%s",presos[i].pabellon);     
+       if(presos[i].tiempoCondena>0)
+      {   
+      }
+      else
+      {
+         printf("\n Por favor ingrese un dato valido \n \n"); 
+      }
+         printf("\n Ingrese el pabellon al que pertenece el preso %d: \n",i+1);
+          printf(" A \t  B \t  C \n \n");
+         scanf("%s",presos[i].pabellon); 
+         if(strcmp(presos[i].pabellon, "a")==0)
+           {
+           } 
+          else
+           { 
+             if(strcmp(presos[i].pabellon, "b")==0)
+             {
+             }
+             else
+             {
+                if(strcmp(presos[i].pabellon, "c")==0)
+                {
+
+                }
+                else {printf("Ingrese una opcion valida de pabellon \n \n");}
+             }
+          }   
+      
   }
 }
 //OP 2
 void mostrarPresos(Carcel presos [], int n)
 {
   printf("\n Lista de Presos registrados son:\n");
-  printf("**********************************************\n");
+  printf("****************\n");
   for (int i=0; i<n;i++)
     {
       printf("* ID: %d\n",presos[i].id);
@@ -177,7 +217,7 @@ void mostrarPresos(Carcel presos [], int n)
       printf("* Crimen cometido: %s \n",presos[i].crimen);
       printf("* Tiempo de condena: %d\n",presos[i].tiempoCondena);
       printf("* Pabellon: %s \n",presos[i].pabellon);
-      printf("**********************************************\n \n");
+      printf("****************\n \n");
     }
 }
 // OP 3
@@ -194,10 +234,18 @@ void ordenarPresos(Carcel presos[],int n)
             presos[j].tiempoCondena=presos[j+1].tiempoCondena;
             presos[j+1].tiempoCondena=aux;
             }
-            
+             for (int n=0;n<i;n++)
+            {
+              if(n<i)
+              {
+                aux=presos[i].id;
+                presos[i].id=presos[i+1].id;
+                
+              }
+            }
 
         }
-         printf( "[ %d ]",presos[i].tiempoCondena);
+         printf( "[ %d ][ID %d ]",presos[i].tiempoCondena, presos[i].id);
          
     }
     printf("\n \n");
